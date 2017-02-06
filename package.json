@@ -1,0 +1,44 @@
+{
+  "name": "ReactReduxTodoAPp",
+  "version": "1.0.0",
+  "description": "React + Redux todo app",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma start",
+    "start": "node server.js"
+  },
+  "author": "Álvaro Márquez",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "*",
+    "express": "*",
+    "react": "*",
+    "react-addons-test-utils": "*",
+    "react-dom": "*",
+    "react-router": "*"
+  },
+  "devDependencies": {
+    "babel-core": "*",
+    "babel-loader": "*",
+    "babel-preset-es2015": "*",
+    "babel-preset-react": "*",
+    "babel-preset-stage-0": "*",
+    "css-loader": "*",
+    "expect": "*",
+    "foundation-sites": "*",
+    "jquery": "*",
+    "karma": "*",
+    "karma-chrome-launcher": "*",
+    "karma-mocha": "*",
+    "karma-mocha-reporter": "*",
+    "karma-sourcemap-loader": "*",
+    "karma-webpack": "*",
+    "mocha": "*",
+    "node-sass": "*",
+    "redux": "*",
+    "sass-loader": "*",
+    "script-loader": "*",
+    "style-loader": "*",
+    "webpack": "^1.14.0"
+  }
+}
