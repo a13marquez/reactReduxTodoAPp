@@ -1,4 +1,5 @@
 var redux = require('redux');
+var axios = require('axios');
 
 console.log('Starting redux example');
 
@@ -88,10 +89,55 @@ var removeMovie = (id) => {
   }
 };
 
+// Map reducer and action generators
+// ----------------------
+var mapReducer = (state = {isFetching: false, url: null}, action) => {
+  switch (action.type) {
+    case 'START_LOCATION_FETCH':
+      return {
+        isFetching: true,
+        url: null
+      }
+    case 'COMPLETE_LOCATION_FETCH':
+      return {
+        isFetching: false,
+        url: action.url
+      }
+    default:
+      return state;
+
+  }
+};
+
+var startLocationFetch = () => {
+  return {
+    type:'START_LOCATION_FETCH'
+  }
+};
+
+var fetchLocation = () => {
+  store.dispatch(startLocationFetch());
+
+  axios.get('http://ipinfo.io').then(function (res) {
+    var loc = res.data.loc;
+    var baseUrl = 'http://maps.google.com?q=';
+
+    store.dispatch(completeLocatioFetch(baseUrl + loc));
+  })
+}
+
+var completeLocatioFetch = (url) => {
+  return {
+    type: 'COMPLETE_LOCATION_FETCH',
+    url
+  }
+}
+
 var reducer= redux.combineReducers({
   name: nameReducer,
   hobbies: hobbiesReducer,
-  movies: moviesReducer
+  movies: moviesReducer,
+  map: mapReducer
 });
 
 
@@ -105,15 +151,24 @@ var unsubscribe = store.subscribe(()=>{
   var state = store.getState();
   console.log('Name is', state.name);
   document.getElementById('app').innerHTML = state.name;
-  console.log('New State', store.getState())
+  console.log('New State', store.getState());
+
+  if (state.map.isFetching) {
+    document.getElementById('app').innerHTML = 'loading'
+  } else if (state.map.url) {
+    document.getElementById('app').innerHTML = '<a href="' + state.map.url + '" target=_blank>View your location</a>'
+  }
 });
+// unsubscribe();
+
+fetchLocation();
 
 var currentState = store.getState();
 store.dispatch(changeName('Álvaro'));
 store.dispatch(addHobby('Play basket   '));
 store.dispatch(addHobby('lifting'));
 store.dispatch(removeHobby(2));
-// unsubscribe();
+
 store.dispatch(changeName('Emily'))
 store.dispatch(addMovie('Mad Max', 'action'))
 store.dispatch(addMovie('The Lord of the Rings','Fantasy'));
