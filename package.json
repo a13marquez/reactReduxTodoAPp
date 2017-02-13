@@ -36,6 +36,7 @@
     "mocha": "*",
     "node-sass": "*",
     "redux": "*",
+    "redux-thunk": "^2.2.0",
     "sass-loader": "*",
     "script-loader": "*",
     "style-loader": "*",
