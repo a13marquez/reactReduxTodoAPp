@@ -2,6 +2,19 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var {Route, Router, IndexRoute, hashHistory} = require('react-router');
 
+var TodoApp = require('TodoApp')
+
+var actions = require('actions');
+var store = require('configureStore').configure();
+
+store.subscribe(() => {
+   console.log('New state', store.getState());
+});
+
+store.dispatch(actions.addTodo('Learn angular'));
+store.dispatch(actions.setSearchText('angular'));
+store.dispatch(actions.toggleShowCompleted());
+
 // Load foundation
 $(document).foundation();
 
@@ -9,6 +22,6 @@ $(document).foundation();
 require('style!css!sass!applicationStyles')
 
 ReactDOM.render(
-   <p>Boilerplate 3 Project</p>,
+   <TodoApp/>,
    document.getElementById('app')
  );
