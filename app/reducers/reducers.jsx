@@ -22,9 +22,10 @@ export var showCompletedReducer = (state = false, action) =>{
 export var todosReducer = (state = [], action) =>{
   switch (action.type) {
     case 'ADD_TODO':
+    debugger;
       return [
         ...state,
-        { 
+        {
           id:uuid(),
           text:action.text,
           completed:false,
@@ -33,6 +34,7 @@ export var todosReducer = (state = [], action) =>{
         }
       ];
     case 'TOGGLE_TODO':
+    debugger;
       return state.map((todo) =>{
         if (todo.id === action.id){
           var nextCompleted = !todo.completed;
@@ -42,6 +44,8 @@ export var todosReducer = (state = [], action) =>{
             completed: nextCompleted,
             completedAt: nextCompleted ? moment().unix() : null
           };
+        } else {
+          return todo;
         }
       });
     default:
