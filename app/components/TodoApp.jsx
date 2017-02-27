@@ -4,10 +4,8 @@ var moment = require('moment');
 
 import TodoList from 'TodoList'
 import AddTodo from 'AddTodo'
-
-var TodoSearch = require('TodoSearch');
+import TodoSearch from 'TodoSearch'
 var TodoAPI = require('TodoAPI');
-
 var TodoApp = React.createClass({
   getInitialState: function (){
     return {
@@ -45,6 +43,7 @@ var TodoApp = React.createClass({
   render: function (){
     var {todos, showCompleted, searchText} = this.state;
     var filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
+    debugger;
     return(
       <div>
         <h1 className="page-title">Todo App</h1>
@@ -57,8 +56,6 @@ var TodoApp = React.createClass({
             </div>
           </div>
         </div>
-
-
       </div>
     )
   }
